@@ -24,6 +24,8 @@ return jsonify({
 @app.route('/api/auth/register', methods=['POST'])
 def register():
 data = request.get_json()
+if data is None:
+    return jsonify({"error": "Invalid request: JSON data expected"}), 400
 return jsonify({
 "message": "Welcome to NODAL FLOW! ",
 "user": {
@@ -33,14 +35,13 @@ return jsonify({
 "id": 1
 },
 "token": "magic_token_123"
-1.
-2.
-3. 
 })
 # Login user
 @app.route('/api/auth/login', methods=['POST'])
 def login():
 data = request.get_json()
+if data is None:
+    return jsonify({"error": "Invalid request: JSON data expected"}), 400
 return jsonify({
 "message": "Welcome back! ",
 "user": {
@@ -57,6 +58,8 @@ data = request.get_json()
 birth_date = data.get('birthDate', '1990-01-01')
 # Simple calculation: add all digits in birth date
 numbers = [int(d) for d in birth_date if d.isdigit()]
+if not numbers:
+    return jsonify({"error": "Invalid birthDate format or no digits found in birthDate"}), 400
 total = sum(numbers)
 # Reduce to single digit
 while total > 9:
