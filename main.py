@@ -33,9 +33,6 @@ return jsonify({
 "id": 1
 },
 "token": "magic_token_123"
-1.
-2.
-3. 
 })
 # Login user
 @app.route('/api/auth/login', methods=['POST'])
